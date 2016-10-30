@@ -37,24 +37,38 @@ set :repo_url, 'eibjj@bitbucket.org:rollfindr/rollfindr_services.git'
 set :rvm_ruby_version, 'ruby-2.1.1'
 
 namespace :deploy do
+  desc "Make sure local git is in sync with remote."
+  task :check_revision do
+    on roles(:app) do
+      puts `git rev-parse HEAD`
+      #unless `git rev-parse HEAD` == `git rev-parse bitbucket/master`
+      #  puts "WARNING: HEAD is not the same as bitbucket/master"
+      #  puts "Run `git push` to sync changes."
+      #  exit
+      #end
+    end
+  end
+  
+  desc "Start the Thin processes"
+  task :start do
+    run  <<-CMD
+      cd /var/www/rollfindr_services/current; bundle exec thin start -C thin.yml
+    CMD
+  end
 
-  desc 'Restart application'
+  desc "Stop the Thin processes"
+  task :stop do
+    run <<-CMD
+      cd /var/www/rollfindr_services/current; bundle exec thin stop -C thin.yml
+    CMD
+  end
+
+  desc "Restart the Thin processes"
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
+    run <<-CMD
+      cd /var/www/rollfindr_services/current; bundle exec thin restart -C thin.yml
+    CMD
   end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
+  
+  before :starting, :check_revision
 end

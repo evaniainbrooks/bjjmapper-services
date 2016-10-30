@@ -1,9 +1,9 @@
 [submodule "locationfetchsvc"]
 	path = locationfetchsvc
-	url = git@bitbucket.org/rollfindr/locationfetchsvc.git
+	url = git@bitbucket.org:rollfindr/locationfetchsvc.git
 [submodule "timezonesvc"]
 	path = timezonesvc
-	url = git@bitbucket.org/rollfindr/timezonesvc.git
+	url = git@bitbucket.org:rollfindr/timezonesvc.git
 [submodule "avatarsvc"]
 	path = avatarsvc
-	url = git@bitbucket.org/rollfindr/avatarsvc.git
+	url = git@bitbucket.org:rollfindr/avatarsvc.git
