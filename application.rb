@@ -8,3 +8,5 @@ Dotenv.load
 require './locationfetchsvc/application.rb'
 require './avatarsvc/application.rb'
 require './timezonesvc/application.rb'
+
+puts "Starting services in #{ENV['RACK_ENV']} environment"
