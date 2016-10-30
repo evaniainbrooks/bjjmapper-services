@@ -5,7 +5,8 @@ gem 'dotenv'
 gem 'exception_notification'
 group :test, :development do
   gem 'capistrano', '~> 3.2.1'
-  gem 'capistrano-bundler'
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm', require: false
 end
 
 gemfiles = [ 'locationfetchsvc/Gemfile', 'timezonesvc/Gemfile', 'avatarsvc/Gemfile' ]
