@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.1'
 
-gem 'dotenv'
+gem 'dotenv', require: false
 
 gem 'exception_notification'
 group :test, :development do
