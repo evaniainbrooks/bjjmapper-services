@@ -47,23 +47,33 @@ namespace :deploy do
   
   desc "Start the Thin processes"
   task :start do
-    run  <<-CMD
-      cd /var/www/rollfindr_services/current; bundle exec thin start -C config/thin.yml
-    CMD
+    on roles :all do
+      execute  <<-CMD
+        cd /var/www/rollfindr_services/current;
+        ruby env.rb;
+        bundle exec thin start -C config/thin.yml
+      CMD
+    end
   end
 
   desc "Stop the Thin processes"
   task :stop do
-    run <<-CMD
-      cd /var/www/rollfindr_services/current; bundle exec thin stop -C config/thin.yml
-    CMD
+    on roles :all do
+      execute <<-CMD
+        cd /var/www/rollfindr_services/current; bundle exec thin stop -C config/thin.yml
+      CMD
+    end
   end
 
   desc "Restart the Thin processes"
   task :restart do
-    run <<-CMD
-      cd /var/www/rollfindr_services/current; bundle exec thin restart -C config/thin.yml
-    CMD
+    on roles :all do
+      execute <<-CMD
+        cd /var/www/rollfindr_services/current;
+        ruby env.rb;
+        bundle exec thin restart -C config/thin.yml
+      CMD
+    end
   end
 
   after :publishing, :restart
