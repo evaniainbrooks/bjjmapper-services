@@ -37,38 +37,44 @@ set :repo_url, 'eibjj@bitbucket.org:rollfindr/rollfindr_services.git'
 set :rvm_ruby_version, 'ruby-2.1.1'
 
 namespace :deploy do
-  desc "Make sure local git is in sync with remote."
-  task :check_revision do
+  desc 'Initial Deploy'
+  task :initial do
     on roles(:app) do
-      puts `git rev-parse HEAD`
-      #unless `git rev-parse HEAD` == `git rev-parse bitbucket/master`
-      #  puts "WARNING: HEAD is not the same as bitbucket/master"
-      #  puts "Run `git push` to sync changes."
-      #  exit
-      #end
+      before 'deploy:restart', 'deploy:start'
+      invoke 'deploy'
     end
   end
   
   desc "Start the Thin processes"
   task :start do
     run  <<-CMD
-      cd /var/www/rollfindr_services/current; bundle exec thin start -C thin.yml
+      cd /var/www/rollfindr_services/current; bundle exec thin start -C config/thin.yml
     CMD
   end
 
   desc "Stop the Thin processes"
   task :stop do
     run <<-CMD
-      cd /var/www/rollfindr_services/current; bundle exec thin stop -C thin.yml
+      cd /var/www/rollfindr_services/current; bundle exec thin stop -C config/thin.yml
     CMD
   end
 
   desc "Restart the Thin processes"
   task :restart do
     run <<-CMD
-      cd /var/www/rollfindr_services/current; bundle exec thin restart -C thin.yml
+      cd /var/www/rollfindr_services/current; bundle exec thin restart -C config/thin.yml
     CMD
   end
-  
-  before :starting, :check_revision
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
 end
