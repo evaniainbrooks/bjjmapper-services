@@ -37,6 +37,17 @@ set :repo_url, 'eibjj@bitbucket.org:rollfindr/rollfindr_services.git'
 set :rvm_ruby_version, 'ruby-2.1.1'
 
 namespace :deploy do
+  desc "Setup env"
+  task :setup_env do
+    on roles :all do
+      execute  <<-CMD
+        cd /var/www/rollfindr_services/current; ruby env.rb
+      CMD
+    end
+  end
+
+  before 'deploy:restart', 'deploy:setup_env'
+
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -49,9 +60,7 @@ namespace :deploy do
   task :start do
     on roles :all do
       execute  <<-CMD
-        cd /var/www/rollfindr_services/current;
-        ruby env.rb;
-        bundle exec thin start -C config/thin.yml
+        cd /var/www/rollfindr_services/current; bundle exec thin start -C config/thin.yml
       CMD
     end
   end
@@ -69,9 +78,7 @@ namespace :deploy do
   task :restart do
     on roles :all do
       execute <<-CMD
-        cd /var/www/rollfindr_services/current;
-        ruby env.rb;
-        bundle exec thin restart -C config/thin.yml
+        cd /var/www/rollfindr_services/current; bundle exec thin restart -C config/thin.yml
       CMD
     end
   end
@@ -86,5 +93,4 @@ namespace :deploy do
       # end
     end
   end
-
 end
