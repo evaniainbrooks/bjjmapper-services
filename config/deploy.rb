@@ -41,7 +41,7 @@ namespace :deploy do
   task :setup_env do
     on roles :all do
       execute  <<-CMD
-        cd /var/www/rollfindr_services/current; rvm do #{fetch(:rvm_ruby_version)} env.rb
+        cd #{fetch(:release_path)}; ~/.rvm/bin/rvm do #{fetch(:rvm_ruby_version)} env.rb
       CMD
     end
   end
@@ -60,7 +60,7 @@ namespace :deploy do
   task :start do
     on roles :all do
       execute  <<-CMD
-        cd /var/www/rollfindr_services/current; bundle exec thin start -C config/thin.yml
+        cd #{fetch(:release_path)}; bundle exec thin start -C config/thin.yml
       CMD
     end
   end
@@ -69,7 +69,7 @@ namespace :deploy do
   task :stop do
     on roles :all do
       execute <<-CMD
-        cd /var/www/rollfindr_services/current; bundle exec thin stop -C config/thin.yml
+        cd #{fetch(:release_path)}; bundle exec thin stop -C config/thin.yml
       CMD
     end
   end
@@ -78,7 +78,7 @@ namespace :deploy do
   task :restart do
     on roles :all do
       execute <<-CMD
-        cd /var/www/rollfindr_services/current; bundle exec thin restart -C config/thin.yml
+        cd #{fetch(:release_path)}; bundle exec thin restart -C config/thin.yml
       CMD
     end
   end
