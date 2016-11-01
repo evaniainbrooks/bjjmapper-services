@@ -41,7 +41,7 @@ namespace :deploy do
   task :setup_env do
     on roles :all do
       execute  <<-CMD
-        cd /var/www/rollfindr_services/current; ruby env.rb
+        cd /var/www/rollfindr_services/current; rvm do #{fetch(:rvm_ruby_version)} env.rb
       CMD
     end
   end
