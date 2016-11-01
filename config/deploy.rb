@@ -41,7 +41,7 @@ namespace :deploy do
   task :setup_env do
     on roles :all do
       execute  <<-CMD
-        cd #{fetch(:release_path)}; ~/.rvm/bin/rvm do #{fetch(:rvm_ruby_version)} env.rb
+        cd #{fetch(:release_path)}; ~/.rvm/bin/rvm #{fetch(:rvm_ruby_version)} do env.rb
       CMD
     end
   end
