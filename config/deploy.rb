@@ -61,7 +61,7 @@ namespace :deploy do
   task :start do
     on roles :all do
       execute  <<-CMD
-        cd #{fetch(:release_path)}; #{fetch(:rvm_do)} bundle exec thin start -C config/thin.yml
+        cd #{fetch(:release_path)}; #{fetch(:rvm_do)} bundle exec thin start -C thin.yml
       CMD
     end
   end
@@ -70,7 +70,7 @@ namespace :deploy do
   task :stop do
     on roles :all do
       execute <<-CMD
-        cd #{fetch(:release_path)}; #{fetch(:rvm_do)} bundle exec thin stop -C config/thin.yml
+        cd #{fetch(:release_path)}; #{fetch(:rvm_do)} bundle exec thin stop -C thin.yml
       CMD
     end
   end
@@ -79,7 +79,7 @@ namespace :deploy do
   task :restart do
     on roles :all do
       execute <<-CMD
-        cd #{fetch(:release_path)}; #{fetch(:rvm_do)} bundle exec thin restart -C config/thin.yml
+        cd #{fetch(:release_path)}; #{fetch(:rvm_do)} bundle exec thin restart -C thin.yml
       CMD
     end
   end
