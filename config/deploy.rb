@@ -35,13 +35,14 @@ set :repo_url, 'eibjj@bitbucket.org:rollfindr/rollfindr_services.git'
 # set :keep_releases, 5
 
 set :rvm_ruby_version, 'ruby-2.1.1'
+set :rvm_do, "~/.rvm/bin/rvm #{fetch(:rvm_ruby_version)} do"
 
 namespace :deploy do
   desc "Setup env"
   task :setup_env do
     on roles :all do
       execute  <<-CMD
-        cd #{fetch(:release_path)}; ~/.rvm/bin/rvm #{fetch(:rvm_ruby_version)} do ruby #{fetch(:release_path)}/env.rb
+        cd #{fetch(:release_path)}; #{rvm_do} ruby #{fetch(:release_path)}/env.rb
       CMD
     end
   end
@@ -60,7 +61,7 @@ namespace :deploy do
   task :start do
     on roles :all do
       execute  <<-CMD
-        cd #{fetch(:release_path)}; bundle exec thin start -C config/thin.yml
+        cd #{fetch(:release_path)}; #{rvm_do} bundle exec thin start -C config/thin.yml
       CMD
     end
   end
@@ -69,7 +70,7 @@ namespace :deploy do
   task :stop do
     on roles :all do
       execute <<-CMD
-        cd #{fetch(:release_path)}; bundle exec thin stop -C config/thin.yml
+        cd #{fetch(:release_path)}; #{rvm_do} bundle exec thin stop -C config/thin.yml
       CMD
     end
   end
@@ -78,7 +79,7 @@ namespace :deploy do
   task :restart do
     on roles :all do
       execute <<-CMD
-        cd #{fetch(:release_path)}; bundle exec thin restart -C config/thin.yml
+        cd #{fetch(:release_path)}; #{rvm_do} bundle exec thin restart -C config/thin.yml
       CMD
     end
   end
