@@ -16,7 +16,7 @@ role :db,  %w{deploy@rollfindr.com}
 # used to set extended properties on the server.
 
 server 'rollfindr.com', user: 'deploy', roles: %w{web app db}
-
+set :rack_env, 'production'
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
