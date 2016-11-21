@@ -42,9 +42,7 @@ namespace :deploy do
   task :setup_env do
     on roles :all do
       execute  <<-CMD
-        run "RACK_ENV=#{fetch(:rack_env)}"
-        run "echo 'RACK_ENV=#{fetch(:rack_env)}'"
-        cd #{fetch(:release_path)}; #{fetch(:rvm_do)} ruby #{fetch(:release_path)}/env.rb
+        RACK_ENV=#{fetch(:rack_env)}; echo 'RACK_ENV=#{fetch(:rack_env)}'; cd #{fetch(:release_path)}; #{fetch(:rvm_do)} ruby #{fetch(:release_path)}/env.rb
       CMD
     end
   end
