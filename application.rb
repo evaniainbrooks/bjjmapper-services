@@ -1,4 +1,4 @@
-['./avatarsvc/.env', './locationfetchsvc/.env', './timezonesvc/.env'].select {|f| File.file?(f)}.join(' ').tap do |files|
+['./websitestatussvc/.env', './avatarsvc/.env', './locationfetchsvc/.env', './timezonesvc/.env'].select {|f| File.file?(f)}.join(' ').tap do |files|
   `cat #{files} > .env`
 end
 
@@ -8,12 +8,12 @@ Dotenv.load
 require './locationfetchsvc/application.rb'
 require './avatarsvc/application.rb'
 require './timezonesvc/application.rb'
+require './websitestatussvc/application.rb'
 require 'exception_notification'
 require 'sinatra'
 
-
 module RollFindrServices
-  class ExceptionHandler < Sinatra::Application
+    class ExceptionHandler < Sinatra::Application
     use ExceptionNotification::Rack,
     :email => {
       :email_prefix => "[Services.BJJMapper] ",

@@ -13,4 +13,5 @@ disable :run
 use AvatarService::Application
 use TimezoneService::Application
 use LocationFetchService::Application
+use WebsiteStatusService::Application
 run RollFindrServices::ExceptionHandler

@@ -7,3 +7,6 @@
 [submodule "avatarsvc"]
 	path = avatarsvc
 	url = git@bitbucket.org:rollfindr/avatarsvc.git
+[submodule "websitestatussvc"]
+	path = websitestatussvc
+	url = git@bitbucket.org:rollfindr/websitestatussvc.git
