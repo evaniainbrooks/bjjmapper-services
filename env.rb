@@ -1,8 +1,6 @@
 require 'erb'
 require 'fileutils'
 require 'dotenv'
-
-
 Dotenv.load
 
 thin_config = ERB.new(File.read("thin.yml.erb"))
