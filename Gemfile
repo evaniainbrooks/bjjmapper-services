@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.1'
 
 gem 'dotenv', require: false
+gem 'newrelic_rpm'
 
 gem 'exception_notification'
 group :test, :development do
