@@ -11,6 +11,7 @@ require './timezonesvc/application.rb'
 require './websitestatussvc/application.rb'
 require 'exception_notification'
 require 'sinatra'
+require 'newrelic_rpm'
 
 module RollFindrServices
     class ExceptionHandler < Sinatra::Application
