@@ -2,6 +2,8 @@
   `cat #{files} > .env`
 end
 
+require 'rubygems'
+require 'bundler/setup'
 require 'dotenv'
 Dotenv.load
 
