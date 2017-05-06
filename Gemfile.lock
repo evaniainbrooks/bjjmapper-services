@@ -1,8 +1,8 @@
 GIT
   remote: git@bitbucket.org:rollfindr/bjjmapper_api_client.git
-  revision: ffd58ab0cedbfd9d88f050df8db542ee363844cf
+  revision: 072033ade0df1833b83540ba0c3cf6e06cf08be1
   specs:
-    bjjmapper_api_client (0.0.2)
+    bjjmapper_api_client (0.0.5)
 
 GEM
   remote: https://rubygems.org/
@@ -62,6 +62,8 @@ GEM
       activesupport (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
     ffi (1.9.17)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
@@ -144,8 +146,13 @@ GEM
       dotenv (~> 1.0.2)
       thor (~> 0.19.1)
     formatador (0.2.5)
+    foursquare2 (2.0.2)
+      faraday (~> 0.8)
+      faraday_middleware (>= 0.8)
+      hashie (>= 1.0, < 4.0.0)
     google_places (0.32.0)
       httparty (~> 0.13.1)
+    hashie (3.5.5)
     http (2.1.0)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -269,7 +276,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   andand
-  bjjmapper_api_client (~> 0.0.2)!
+  bjjmapper_api_client (~> 0.0.5)!
   capistrano (~> 3.2.1)
   capistrano-bundler
   capistrano-rvm
@@ -279,6 +286,7 @@ DEPENDENCIES
   factory_girl
   fog
   foreman
+  foursquare2
   google_places
   http
   json

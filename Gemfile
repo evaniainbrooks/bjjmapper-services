@@ -12,7 +12,7 @@ group :test, :development do
   gem 'rubocop'
 end
 
-gemfiles = [ './locationfetchsvc/Gemfile', './timezonesvc/Gemfile', './avatarsvc/Gemfile', './websitestatussvc/Gemfile' ]
+gemfiles = [ 'locationfetchsvc/Gemfile', 'timezonesvc/Gemfile', 'avatarsvc/Gemfile', 'websitestatussvc/Gemfile' ]
 gemfiles.each do |gemfile|
   eval_gemfile gemfile
 end
