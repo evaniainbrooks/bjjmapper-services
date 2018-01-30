@@ -34,7 +34,7 @@ set :repo_url, 'eibjj@bitbucket.org:rollfindr/rollfindr_services.git'
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :rvm_ruby_version, 'ruby-2.1.1'
+set :rvm_ruby_version, 'ruby-2.3.6'
 set :rvm_do, "~/.rvm/bin/rvm #{fetch(:rvm_ruby_version)} do"
 
 namespace :deploy do
@@ -56,7 +56,7 @@ namespace :deploy do
       invoke 'deploy'
     end
   end
-  
+
   desc "Start the Thin processes"
   task :start do
     on roles :all do

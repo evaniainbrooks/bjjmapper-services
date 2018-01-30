@@ -1,3 +1,4 @@
 thin.yml
 .env
 /uploads
+/log
